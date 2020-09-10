@@ -14,11 +14,6 @@ if [ "$1" == "install" ]; then
 
 elif [ "$1" == "opa" ]; then
 
-  #kubectl create ns opa
-  #kubectl create -n opa secret tls opa-server --cert=server.crt --key=server.key
-  #kubectl apply -f admission_control.yaml
-  #kubectl apply -f webhook-configuration.yaml
-
   ## ignore the namespaces kube-system and opa
   kubectl create ns opa
   kubectl label ns kube-system openpolicyagent.org/webhook=ignore
