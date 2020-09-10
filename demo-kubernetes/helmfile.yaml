@@ -1,0 +1,14 @@
+helmDefaults:
+  timeout: 300
+  createNamespace: true
+
+repositories:
+- name: stable
+  url: https://kubernetes-charts.storage.googleapis.com
+
+releases:
+- name: opa
+  chart: stable/opa
+  namespace: opa
+  values:
+  - opa-chart-values.yaml

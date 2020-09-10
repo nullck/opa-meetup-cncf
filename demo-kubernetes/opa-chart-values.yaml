@@ -1,0 +1,62 @@
+opa: false
+
+admissionControllerRules:
+  - operations: ["CREATE", "UPDATE"]
+    apiGroups: ["*"]
+    apiVersions: ["*"]
+    resources: ["*"]
+  - operations: ["DELETE"]
+    apiGroups: ["*"]
+    apiVersions: ["*"]
+    resources: ["namespaces"]
+
+#authz:
+#  enabled: false
+
+image: openpolicyagent/opa
+imageTag: 0.17.3
+imagePullPolicy: IfNotPresent
+
+mgmt:
+  enabled: true
+  image: openpolicyagent/kube-mgmt
+  imageTag: "0.10"
+  imagePullPolicy: IfNotPresent
+  port: 8181
+  extraArgs: []
+  resources: {}
+  data:
+    enabled: false
+  configmapPolicies:
+    enabled: true
+    namespaces: [opa, kube-federation-scheduling-policy]
+    requireLabel: true
+
+logLevel: info
+
+serviceAccount:
+  create: true
+  name: opa
+
+rbac:
+  create: true
+  rules:
+    cluster:
+    - apiGroups:
+        - ""
+      resources:
+      - namespaces
+      verbs:
+      - get
+      - list
+      - watch
+    - apiGroups:
+        - ""
+      resources:
+      - configmaps
+      verbs:
+      - create
+      - get
+      - list
+      - watch
+      - patch
