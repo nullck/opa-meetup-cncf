@@ -2,6 +2,8 @@ package kubernetes.admission
 
 import data.kubernetes.namespaces
 
+import input.request.object.metadata.annotations as annotations
+
 operations = {"DELETE"}
 
 deny[msg] {
