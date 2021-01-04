@@ -1,19 +1,13 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: DaemonSet
 metadata:
   name: ydf-app-demo-stage
   namespace: qa
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/instance: ydf-app-demo-stage
       app.kubernetes.io/name: ydf-app-demo
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -21,7 +15,7 @@ spec:
         app.kubernetes.io/name: ydf-app-demo
     spec:
       containers:
-      - image: circle_helm_test
+      - image: nullck/circle_helm_test:lala
         imagePullPolicy: IfNotPresent
         name: ydf-app-demo
         ports:
