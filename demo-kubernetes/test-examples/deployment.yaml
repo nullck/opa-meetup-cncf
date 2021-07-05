@@ -1,8 +1,13 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ydf-app-demo-stage
   namespace: qa
+  labels:
+    banana: lala
+    app: alla
+    environment: qa
+    costCenter: lala
 spec:
   replicas: 1
   selector:
@@ -21,7 +26,7 @@ spec:
         app.kubernetes.io/name: ydf-app-demo
     spec:
       containers:
-      - image: circle_helm_test
+      - image: nullck/circle_helm_test
         imagePullPolicy: IfNotPresent
         name: ydf-app-demo
         ports:
